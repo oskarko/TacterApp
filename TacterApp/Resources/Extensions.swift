@@ -158,3 +158,9 @@ extension UIColor {
 
     static let tacterYellow = UIColor.rgb(red: 199, green: 158, blue: 87)
 }
+
+// MARK: - Notification
+
+extension Notification.Name {
+    static let didChampionCustomViewTap = Notification.Name("didChampionCustomViewTap")
+}

@@ -42,6 +42,9 @@ class TeamBuilderView: UIViewController {
 
     private let viewModel: TeamBuilderViewModel
     private var champions = [Champion]()
+    private var selectedCustomViewTag: Int = 0
+    private lazy var stack: UIStackView = TeamBuilderFactory.shared.createCustomViews(rows: 2,
+                                                                                      viewsPerRow: 5)
 
     // MARK: - Lifecycle
 
@@ -56,6 +59,11 @@ class TeamBuilderView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onDidChampionCustomViewTap(_:)),
+                                               name: .didChampionCustomViewTap,
+                                               object: nil)
+
         getChampionsList()
         configureUI()
     }
@@ -63,6 +71,15 @@ class TeamBuilderView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar(withTitle: "Team builder", prefersLargeTitles: false)
+
+        view.addSubview(stack)
+        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                     left: view.safeAreaLayoutGuide.leftAnchor,
+                     right: view.safeAreaLayoutGuide.rightAnchor,
+                     paddingTop: 16,
+                     paddingLeft: 16,
+                     paddingRight: 16)
+        stack.setHeight(height: 140)
     }
 
     // MARK: - Selectors
@@ -73,6 +90,13 @@ class TeamBuilderView: UIViewController {
 
     @objc func handleCancelComposition() {
         dismiss(animated: true, completion: nil)
+    }
+
+    @objc func onDidChampionCustomViewTap(_ notification:Notification) {
+        guard let userInfo = notification.userInfo,
+              let tag = userInfo["tag"] as? Int else { return }
+        selectedCustomViewTag = tag
+        changeSelectedChampionCustomView()
     }
 
     // MARK: - API
@@ -100,10 +124,21 @@ class TeamBuilderView: UIViewController {
     // MARK: - Helpers
 
     private func configureUI() {
-        view.backgroundColor = .red
+        view.backgroundColor = .black
 
         actionButton.setTitle(viewModel.actionButtonTitle, for: .normal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: actionButton)
+    }
+
+    private func changeSelectedChampionCustomView() {
+        for arrangedSubview in stack.arrangedSubviews {
+            guard let subStack = arrangedSubview as? UIStackView else { return }
+
+            for arrangedView in subStack.arrangedSubviews {
+                arrangedView.layer.borderColor = (arrangedView.tag == selectedCustomViewTag ?
+                        UIColor.tacterYellow : UIColor.black).cgColor
+            }
+        }
     }
 }

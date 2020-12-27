@@ -22,6 +22,7 @@
 		E255C1A925987586001BF58D /* Champion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1A825987586001BF58D /* Champion.swift */; };
 		E255C1AC25987747001BF58D /* ManagerServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1AB25987747001BF58D /* ManagerServices.swift */; };
 		E255C1B025987BE9001BF58D /* TeamBuilderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1AF25987BE9001BF58D /* TeamBuilderViewModel.swift */; };
+		E255C1B3259898ED001BF58D /* TeamBuilderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1B2259898ED001BF58D /* TeamBuilderFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		E255C1A825987586001BF58D /* Champion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Champion.swift; sourceTree = "<group>"; };
 		E255C1AB25987747001BF58D /* ManagerServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerServices.swift; sourceTree = "<group>"; };
 		E255C1AF25987BE9001BF58D /* TeamBuilderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBuilderViewModel.swift; sourceTree = "<group>"; };
+		E255C1B2259898ED001BF58D /* TeamBuilderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBuilderFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			children = (
 				E200CF3225986B17003FCD4B /* Extensions.swift */,
 				E255C19D25987067001BF58D /* Constants.swift */,
+				E255C1B2259898ED001BF58D /* TeamBuilderFactory.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				E200CF3325986B17003FCD4B /* Extensions.swift in Sources */,
 				E200CF24259867CC003FCD4B /* HomeView.swift in Sources */,
 				E200CEF62598677A003FCD4B /* AppDelegate.swift in Sources */,
+				E255C1B3259898ED001BF58D /* TeamBuilderFactory.swift in Sources */,
 				E200CF2F259869EF003FCD4B /* HomeViewModel.swift in Sources */,
 				E255C1AC25987747001BF58D /* ManagerServices.swift in Sources */,
 				E200CEF82598677A003FCD4B /* SceneDelegate.swift in Sources */,
