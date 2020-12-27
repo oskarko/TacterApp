@@ -7,6 +7,8 @@
 
 import UIKit
 
+private let reuseIdentifier = "ChampionCell"
+
 class TeamBuilderView: UIViewController {
 
     // MARK: - Properties
@@ -40,8 +42,15 @@ class TeamBuilderView: UIViewController {
         return button
     }()
 
+    private lazy var collectionView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+
+        return collection
+    }()
+
     private let viewModel: TeamBuilderViewModel
     private var champions = [Champion]()
+    private var selectedChampions = [Champion](repeating: Champion(), count: 2 * 5)
     private var selectedCustomViewTag: Int = 0
     private lazy var stack: UIStackView = TeamBuilderFactory.shared.createCustomViews(rows: 2,
                                                                                       viewsPerRow: 5)
@@ -71,15 +80,6 @@ class TeamBuilderView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar(withTitle: "Team builder", prefersLargeTitles: false)
-
-        view.addSubview(stack)
-        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor,
-                     left: view.safeAreaLayoutGuide.leftAnchor,
-                     right: view.safeAreaLayoutGuide.rightAnchor,
-                     paddingTop: 16,
-                     paddingLeft: 16,
-                     paddingRight: 16)
-        stack.setHeight(height: 140)
     }
 
     // MARK: - Selectors
@@ -117,7 +117,9 @@ class TeamBuilderView: UIViewController {
             }
 
             strongSelf.champions = champions
-            print("championID: \(champions[0].championId)")
+            DispatchQueue.main.async {
+                strongSelf.collectionView.reloadData()
+            }
         }
     }
 
@@ -129,16 +131,117 @@ class TeamBuilderView: UIViewController {
         actionButton.setTitle(viewModel.actionButtonTitle, for: .normal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: actionButton)
+
+        view.addSubview(stack)
+        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                     left: view.safeAreaLayoutGuide.leftAnchor,
+                     right: view.safeAreaLayoutGuide.rightAnchor,
+                     paddingTop: 16,
+                     paddingLeft: 16,
+                     paddingRight: 16)
+        stack.setHeight(height: 140)
+
+        collectionView.backgroundColor = .black
+        collectionView.delegate = self
+        collectionView.dataSource = self
+
+        collectionView.register(ChampionCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.alwaysBounceVertical = true
+        collectionView.keyboardDismissMode = .interactive
+
+        view.addSubview(collectionView)
+        collectionView.anchor(top: stack.bottomAnchor,
+                              left: view.safeAreaLayoutGuide.leftAnchor,
+                              bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                              right: view.safeAreaLayoutGuide.rightAnchor,
+                              paddingTop: 16,
+                              paddingLeft: 16,
+                              paddingBottom: 16,
+                              paddingRight: 16)
     }
 
     private func changeSelectedChampionCustomView() {
+//        for arrangedSubview in stack.arrangedSubviews {
+//            guard let subStack = arrangedSubview as? UIStackView else { return }
+//
+//            for arrangedView in subStack.arrangedSubviews {
+////                guard let customView = arrangedView as? ChampionCustomView else { return }
+//                print("... \(arrangedView.tag) and selectedtag: \(selectedCustomViewTag)")
+//                arrangedView.layer.borderColor = (arrangedView.tag == selectedCustomViewTag ?
+//                        UIColor.tacterYellow : UIColor.black).cgColor
+//
+//                let isIndexValid = selectedChampions.indices.contains(arrangedView.tag)
+//                guard isIndexValid else { return }
+//
+//                guard let iconURL = selectedChampions[arrangedView.tag].iconURL else { return }
+//
+//                guard let customView = arrangedView as? ChampionCustomView else { return }
+//
+//                let url = URL(string: iconURL)
+//                customView.imageView.sd_setImage(with: url, completed: nil)
+//            }
+//        }
         for arrangedSubview in stack.arrangedSubviews {
             guard let subStack = arrangedSubview as? UIStackView else { return }
 
             for arrangedView in subStack.arrangedSubviews {
+                print("... \(arrangedView.tag) and selectedtag: \(selectedCustomViewTag)")
                 arrangedView.layer.borderColor = (arrangedView.tag == selectedCustomViewTag ?
-                        UIColor.tacterYellow : UIColor.black).cgColor
+                                                    UIColor.tacterYellow : UIColor.black).cgColor
+
+                let isIndexValid = selectedChampions.indices.contains(arrangedView.tag)
+                guard isIndexValid else { return }
+
+                guard let iconURL = selectedChampions[arrangedView.tag].iconURL else { return }
+
+                guard let customView = arrangedView as? ChampionCustomView else { return }
+
+                let url = URL(string: iconURL)
+                customView.imageView.sd_setImage(with: url, completed: nil)
             }
         }
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension TeamBuilderView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedChampion = champions[indexPath.row]
+        if selectedChampions.count > selectedCustomViewTag {
+            selectedChampions.remove(at: selectedCustomViewTag)
+        }
+
+        selectedChampions.insert(selectedChampion, at: selectedCustomViewTag)
+        changeSelectedChampionCustomView()
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension TeamBuilderView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return champions.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ChampionCell
+        cell.champion = champions[indexPath.row]
+
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension TeamBuilderView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        return .init(width: 50, height: 80)
+    }
+
+    // Padding for the collectionView
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .init(top: 48, left: 8, bottom: 0, right: 8)
     }
 }

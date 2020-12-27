@@ -23,6 +23,9 @@
 		E255C1AC25987747001BF58D /* ManagerServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1AB25987747001BF58D /* ManagerServices.swift */; };
 		E255C1B025987BE9001BF58D /* TeamBuilderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1AF25987BE9001BF58D /* TeamBuilderViewModel.swift */; };
 		E255C1B3259898ED001BF58D /* TeamBuilderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1B2259898ED001BF58D /* TeamBuilderFactory.swift */; };
+		E255C1B82598A9FC001BF58D /* ChampionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1B72598A9FC001BF58D /* ChampionCell.swift */; };
+		E255C1BB2598AA87001BF58D /* ChampionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1BA2598AA87001BF58D /* ChampionViewModel.swift */; };
+		E255C1BE2598B234001BF58D /* ChampionCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1BD2598B234001BF58D /* ChampionCustomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		E255C1AB25987747001BF58D /* ManagerServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerServices.swift; sourceTree = "<group>"; };
 		E255C1AF25987BE9001BF58D /* TeamBuilderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBuilderViewModel.swift; sourceTree = "<group>"; };
 		E255C1B2259898ED001BF58D /* TeamBuilderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBuilderFactory.swift; sourceTree = "<group>"; };
+		E255C1B72598A9FC001BF58D /* ChampionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionCell.swift; sourceTree = "<group>"; };
+		E255C1BA2598AA87001BF58D /* ChampionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionViewModel.swift; sourceTree = "<group>"; };
+		E255C1BD2598B234001BF58D /* ChampionCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionCustomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				E255C1AF25987BE9001BF58D /* TeamBuilderViewModel.swift */,
+				E255C1BA2598AA87001BF58D /* ChampionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -178,6 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				E200CF3B25986BF8003FCD4B /* TeamBuilderView.swift */,
+				E255C1B72598A9FC001BF58D /* ChampionCell.swift */,
+				E255C1BD2598B234001BF58D /* ChampionCustomView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -321,10 +330,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E200CF2C259869CF003FCD4B /* Composition.swift in Sources */,
+				E255C1BB2598AA87001BF58D /* ChampionViewModel.swift in Sources */,
 				E200CF3C25986BF8003FCD4B /* TeamBuilderView.swift in Sources */,
+				E255C1BE2598B234001BF58D /* ChampionCustomView.swift in Sources */,
 				E200CF3325986B17003FCD4B /* Extensions.swift in Sources */,
 				E200CF24259867CC003FCD4B /* HomeView.swift in Sources */,
 				E200CEF62598677A003FCD4B /* AppDelegate.swift in Sources */,
+				E255C1B82598A9FC001BF58D /* ChampionCell.swift in Sources */,
 				E255C1B3259898ED001BF58D /* TeamBuilderFactory.swift in Sources */,
 				E200CF2F259869EF003FCD4B /* HomeViewModel.swift in Sources */,
 				E255C1AC25987747001BF58D /* ManagerServices.swift in Sources */,

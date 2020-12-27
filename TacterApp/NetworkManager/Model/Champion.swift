@@ -15,5 +15,13 @@ struct Champion: Codable {
     let name: String
     let cost: Int
     let costColor: String
-    let iconURL: String
+    let iconURL: String?
+
+    init() {
+        championId = -1
+        name = ""
+        cost = -1
+        costColor = ""
+        iconURL = ""
+    }
 }
