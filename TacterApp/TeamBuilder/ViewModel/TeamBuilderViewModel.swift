@@ -8,6 +8,12 @@
 import Foundation
 
 struct TeamBuilderViewModel {
+    // MARK: - Properties
+    
+    let actionButtonTitle: String = "Save"
+
+    // MARK: - API
+    
     func getChampionsList(completionHandler: @escaping ([Champion]?) -> Void) {
         ManagerServices.shared.getChampionsList(completionHandler: completionHandler)
     }

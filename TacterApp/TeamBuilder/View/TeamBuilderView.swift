@@ -11,6 +11,35 @@ class TeamBuilderView: UIViewController {
 
     // MARK: - Properties
 
+    private lazy var actionButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .black
+        button.setTitle("Save", for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.setTitleColor(.tacterYellow, for: .normal)
+        button.frame = CGRect(x: 0,
+                              y: 0,
+                              width: BARBUTTON_STANDARD_SIZE.width * 2,
+                              height: BARBUTTON_STANDARD_SIZE.height)
+        button.addTarget(self, action: #selector(handleSaveComposition), for: .touchUpInside)
+
+        return button
+    }()
+
+    private lazy var cancelButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        button.tintColor = .darkGray
+        button.frame = CGRect(x: 0,
+                              y: 0,
+                              width: BARBUTTON_STANDARD_SIZE.width,
+                              height: BARBUTTON_STANDARD_SIZE.height)
+        button.addTarget(self, action: #selector(handleCancelComposition), for: .touchUpInside)
+
+        return button
+    }()
+
     private let viewModel: TeamBuilderViewModel
     private var champions = [Champion]()
 
@@ -31,7 +60,20 @@ class TeamBuilderView: UIViewController {
         configureUI()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationBar(withTitle: "Team builder", prefersLargeTitles: false)
+    }
+
     // MARK: - Selectors
+
+    @objc func handleSaveComposition() {
+        print("SAVE!")
+    }
+
+    @objc func handleCancelComposition() {
+        dismiss(animated: true, completion: nil)
+    }
 
     // MARK: - API
 
@@ -60,5 +102,8 @@ class TeamBuilderView: UIViewController {
     private func configureUI() {
         view.backgroundColor = .red
 
+        actionButton.setTitle(viewModel.actionButtonTitle, for: .normal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: actionButton)
     }
 }
