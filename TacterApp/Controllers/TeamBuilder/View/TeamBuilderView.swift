@@ -85,7 +85,17 @@ class TeamBuilderView: UIViewController {
     // MARK: - Selectors
 
     @objc func handleSaveComposition() {
-        print("SAVE!")
+        DispatchQueue.main.async {
+            self.showLoader(true, withText: "Saving")
+        }
+        var comp = Composition()
+        comp.listOfChampions = selectedChampions
+        LocalManagerServices.shared.write(composition: comp)
+
+        DispatchQueue.main.async {
+            self.showLoader(false)
+        }
+        dismiss(animated: true, completion: nil)
     }
 
     @objc func handleCancelComposition() {
@@ -161,40 +171,17 @@ class TeamBuilderView: UIViewController {
     }
 
     private func changeSelectedChampionCustomView() {
-//        for arrangedSubview in stack.arrangedSubviews {
-//            guard let subStack = arrangedSubview as? UIStackView else { return }
-//
-//            for arrangedView in subStack.arrangedSubviews {
-////                guard let customView = arrangedView as? ChampionCustomView else { return }
-//                print("... \(arrangedView.tag) and selectedtag: \(selectedCustomViewTag)")
-//                arrangedView.layer.borderColor = (arrangedView.tag == selectedCustomViewTag ?
-//                        UIColor.tacterYellow : UIColor.black).cgColor
-//
-//                let isIndexValid = selectedChampions.indices.contains(arrangedView.tag)
-//                guard isIndexValid else { return }
-//
-//                guard let iconURL = selectedChampions[arrangedView.tag].iconURL else { return }
-//
-//                guard let customView = arrangedView as? ChampionCustomView else { return }
-//
-//                let url = URL(string: iconURL)
-//                customView.imageView.sd_setImage(with: url, completed: nil)
-//            }
-//        }
         for arrangedSubview in stack.arrangedSubviews {
             guard let subStack = arrangedSubview as? UIStackView else { return }
 
             for arrangedView in subStack.arrangedSubviews {
-                print("... \(arrangedView.tag) and selectedtag: \(selectedCustomViewTag)")
                 arrangedView.layer.borderColor = (arrangedView.tag == selectedCustomViewTag ?
                                                     UIColor.tacterYellow : UIColor.black).cgColor
 
                 let isIndexValid = selectedChampions.indices.contains(arrangedView.tag)
-                guard isIndexValid else { return }
 
-                guard let iconURL = selectedChampions[arrangedView.tag].iconURL else { return }
-
-                guard let customView = arrangedView as? ChampionCustomView else { return }
+                guard isIndexValid, let iconURL = selectedChampions[arrangedView.tag].iconURL,
+                      let customView = arrangedView as? ChampionCustomView else { return }
 
                 let url = URL(string: iconURL)
                 customView.imageView.sd_setImage(with: url, completed: nil)
@@ -208,11 +195,13 @@ class TeamBuilderView: UIViewController {
 extension TeamBuilderView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedChampion = champions[indexPath.row]
+        // If exists a previous champion, we must delete it
         if selectedChampions.count > selectedCustomViewTag {
             selectedChampions.remove(at: selectedCustomViewTag)
         }
 
         selectedChampions.insert(selectedChampion, at: selectedCustomViewTag)
+        // Update our UI
         changeSelectedChampionCustomView()
     }
 }

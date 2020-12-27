@@ -8,5 +8,7 @@
 import Foundation
 
 struct Composition {
-    
+    var id: UUID = UUID()
+    var date: Date = Date()
+    var listOfChampions: [Champion] = [Champion]()
 }

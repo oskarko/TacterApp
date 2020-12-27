@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Helper class to generate dynamic views to insert directly in our collectionview or cells.
 class TeamBuilderFactory {
     static let shared = TeamBuilderFactory()
 
@@ -40,6 +41,7 @@ class TeamBuilderFactory {
         return view
     }
 
+    ///  We will manage our views thanks to the tag attribute in order to recognize which view the user is tapping on.
     @objc func handleTap(gesture: UITapGestureRecognizer) {
         guard let view = gesture.view else { return }
 

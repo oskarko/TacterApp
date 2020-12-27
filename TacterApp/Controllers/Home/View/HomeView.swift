@@ -46,19 +46,21 @@ class HomeView: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar(withTitle: "My comps", prefersLargeTitles: false)
+
+        compositions = viewModel.getCompositions()
+        tableView.reloadData()
     }
 
     // MARK: - Selectors
 
     @objc func showNewComposition() {
+        // TODO Use Router/Coordinator here!
         let viewModel = TeamBuilderViewModel()
         let controller = TeamBuilderView(viewModel: viewModel)
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
     }
-
-    // MARK: - API
 
     // MARK: - Helpers
 
@@ -78,21 +80,33 @@ class HomeView: UITableViewController {
     private func configureTableView() {
         tableView.backgroundColor = .black
         tableView.rowHeight = HOME_TABLEVIEW_ROW_HEIGHT
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(CompositionCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.tableFooterView = UIView()
         tableView.frame = view.frame
     }
-
 }
 
 // MARK: - UITableViewDataSource
 
 extension HomeView {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return compositions.count
+    }
 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CompositionCell
+        cell.composition = compositions[indexPath.row]
+        cell.selectionStyle = .none
+
+        return cell
+    }
 }
 
 // MARK: - UITableViewDelegate
 
 extension HomeView {
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO
+        // Show Details view.
+    }
 }

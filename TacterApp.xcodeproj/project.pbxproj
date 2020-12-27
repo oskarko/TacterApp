@@ -26,6 +26,10 @@
 		E255C1B82598A9FC001BF58D /* ChampionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1B72598A9FC001BF58D /* ChampionCell.swift */; };
 		E255C1BB2598AA87001BF58D /* ChampionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1BA2598AA87001BF58D /* ChampionViewModel.swift */; };
 		E255C1BE2598B234001BF58D /* ChampionCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1BD2598B234001BF58D /* ChampionCustomView.swift */; };
+		E255C1C22598CB92001BF58D /* LocalManagerServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1C12598CB92001BF58D /* LocalManagerServices.swift */; };
+		E255C1EB2598D1C7001BF58D /* tacterApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E255C1E92598D1C7001BF58D /* tacterApp.xcdatamodeld */; };
+		E255C1EE2598DFCE001BF58D /* CompositionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1ED2598DFCE001BF58D /* CompositionCell.swift */; };
+		E255C1F12598E210001BF58D /* HomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E255C1F02598E210001BF58D /* HomeFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +56,10 @@
 		E255C1B72598A9FC001BF58D /* ChampionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionCell.swift; sourceTree = "<group>"; };
 		E255C1BA2598AA87001BF58D /* ChampionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionViewModel.swift; sourceTree = "<group>"; };
 		E255C1BD2598B234001BF58D /* ChampionCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionCustomView.swift; sourceTree = "<group>"; };
+		E255C1C12598CB92001BF58D /* LocalManagerServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalManagerServices.swift; sourceTree = "<group>"; };
+		E255C1EA2598D1C7001BF58D /* tacterApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tacterApp.xcdatamodel; sourceTree = "<group>"; };
+		E255C1ED2598DFCE001BF58D /* CompositionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionCell.swift; sourceTree = "<group>"; };
+		E255C1F02598E210001BF58D /* HomeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +112,11 @@
 		E200CEF42598677A003FCD4B /* TacterApp */ = {
 			isa = PBXGroup;
 			children = (
-				E200CF22259867B5003FCD4B /* Home */,
-				E200CF3725986BCC003FCD4B /* TeamBuilder */,
+				E255C1F72598F1E7001BF58D /* App */,
+				E255C1F62598F1D6001BF58D /* Controllers */,
+				E255C1C02598CB6A001BF58D /* LocalManager */,
 				E255C1A62598747D001BF58D /* NetworkManager */,
 				E200CF3125986B04003FCD4B /* Resources */,
-				E200CEF52598677A003FCD4B /* AppDelegate.swift */,
-				E200CEF72598677A003FCD4B /* SceneDelegate.swift */,
 				E200CEFB2598677A003FCD4B /* Main.storyboard */,
 				E200CEFE2598677B003FCD4B /* Assets.xcassets */,
 				E200CF002598677B003FCD4B /* LaunchScreen.storyboard */,
@@ -121,6 +128,7 @@
 		E200CF22259867B5003FCD4B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E255C1F32598EEC1001BF58D /* Utils */,
 				E200CF28259867DE003FCD4B /* Model */,
 				E200CF27259867D1003FCD4B /* View */,
 				E200CF29259867E5003FCD4B /* ViewModel */,
@@ -132,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				E200CF23259867CC003FCD4B /* HomeView.swift */,
+				E255C1ED2598DFCE001BF58D /* CompositionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -157,7 +166,6 @@
 			children = (
 				E200CF3225986B17003FCD4B /* Extensions.swift */,
 				E255C19D25987067001BF58D /* Constants.swift */,
-				E255C1B2259898ED001BF58D /* TeamBuilderFactory.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 		E200CF3725986BCC003FCD4B /* TeamBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				E255C1F42598EECD001BF58D /* Utils */,
 				E200CF3A25986BE2003FCD4B /* Model */,
 				E200CF3925986BDE003FCD4B /* View */,
 				E200CF3825986BD9003FCD4B /* ViewModel */,
@@ -213,6 +222,49 @@
 				E255C1A825987586001BF58D /* Champion.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E255C1C02598CB6A001BF58D /* LocalManager */ = {
+			isa = PBXGroup;
+			children = (
+				E255C1C12598CB92001BF58D /* LocalManagerServices.swift */,
+			);
+			path = LocalManager;
+			sourceTree = "<group>";
+		};
+		E255C1F32598EEC1001BF58D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E255C1F02598E210001BF58D /* HomeFactory.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		E255C1F42598EECD001BF58D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E255C1B2259898ED001BF58D /* TeamBuilderFactory.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		E255C1F62598F1D6001BF58D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E200CF22259867B5003FCD4B /* Home */,
+				E200CF3725986BCC003FCD4B /* TeamBuilder */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E255C1F72598F1E7001BF58D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E200CEF52598677A003FCD4B /* AppDelegate.swift */,
+				E255C1E92598D1C7001BF58D /* tacterApp.xcdatamodeld */,
+				E200CEF72598677A003FCD4B /* SceneDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,11 +391,15 @@
 				E255C1B82598A9FC001BF58D /* ChampionCell.swift in Sources */,
 				E255C1B3259898ED001BF58D /* TeamBuilderFactory.swift in Sources */,
 				E200CF2F259869EF003FCD4B /* HomeViewModel.swift in Sources */,
+				E255C1EE2598DFCE001BF58D /* CompositionCell.swift in Sources */,
 				E255C1AC25987747001BF58D /* ManagerServices.swift in Sources */,
 				E200CEF82598677A003FCD4B /* SceneDelegate.swift in Sources */,
 				E255C19E25987067001BF58D /* Constants.swift in Sources */,
+				E255C1EB2598D1C7001BF58D /* tacterApp.xcdatamodeld in Sources */,
 				E255C1B025987BE9001BF58D /* TeamBuilderViewModel.swift in Sources */,
 				E255C1A925987586001BF58D /* Champion.swift in Sources */,
+				E255C1F12598E210001BF58D /* HomeFactory.swift in Sources */,
+				E255C1C22598CB92001BF58D /* LocalManagerServices.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +603,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E255C1E92598D1C7001BF58D /* tacterApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E255C1EA2598D1C7001BF58D /* tacterApp.xcdatamodel */,
+			);
+			currentVersion = E255C1EA2598D1C7001BF58D /* tacterApp.xcdatamodel */;
+			path = tacterApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E200CEEA2598677A003FCD4B /* Project object */;
 }

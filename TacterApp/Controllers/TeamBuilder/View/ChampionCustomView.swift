@@ -17,7 +17,7 @@ class ChampionCustomView: UIView {
         iv.layer.borderWidth = 2
         iv.layer.borderColor = UIColor.darkGray.cgColor
         iv.layer.cornerRadius = 8
-        iv.setDimensions(height: 48, width: 48)
+        iv.setDimensions(height: (height / 6 ) * 5, width: (width / 6 ) * 5)
         iv.isUserInteractionEnabled = true
         iv.addGestureRecognizer(UITapGestureRecognizer(target: self,
                                                        action: #selector(handleTap)))
@@ -25,17 +25,27 @@ class ChampionCustomView: UIView {
         return iv
     }()
 
+    var champion: Champion? {
+        didSet { configure() }
+    }
+
+    private var height: CGFloat = 0
+    private var width: CGFloat = 0
+
     // MARK: - Lifecycle
 
-    init(tag: Int) {
+    init(tag: Int, height: CGFloat = 54, width: CGFloat = 54) {
         super.init(frame: .zero)
         self.tag = tag
-        backgroundColor = .black
+        self.height = height
+        self.width = width
 
+        backgroundColor = .black
         layer.borderWidth = 2
         layer.borderColor = (tag == 0 ? UIColor.tacterYellow : UIColor.black).cgColor
-        layer.cornerRadius = 9
-        setDimensions(height: 54, width: 54)
+        layer.cornerRadius = height / 6
+
+        setDimensions(height: height, width: height)
 
         addSubview(imageView)
         imageView.centerX(inView: self)
@@ -46,10 +56,22 @@ class ChampionCustomView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Helpers
+
+    private func configure() {
+        guard let champion = champion else { return }
+
+        imageView.isHidden = champion.championId == -1
+
+        guard let iconURL = champion.iconURL,
+              let url = URL(string: iconURL) else { return }
+
+        imageView.sd_setImage(with: url)
+    }
+
     // MARK: - Selectors
 
     @objc func handleTap(gesture: UITapGestureRecognizer) {
-        print("tap tap \(tag)")
         NotificationCenter.default.post(name: .didChampionCustomViewTap,
                                         object: nil,
                                         userInfo: ["tag": tag])

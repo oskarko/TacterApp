@@ -10,6 +10,7 @@ import Foundation
 class ManagerServices {
     static let shared = ManagerServices()
 
+    /// Fetch from our API all Champions available.
     func getChampionsList(completionHandler: @escaping ([Champion]?) -> Void) {
 
         let session = URLSession.shared

@@ -24,4 +24,12 @@ struct Champion: Codable {
         costColor = ""
         iconURL = ""
     }
+
+    init(championId: Int, name: String, cost: Int, costColor: String, iconURL: String?) {
+        self.championId = championId
+        self.name = name
+        self.cost = cost
+        self.costColor = costColor
+        self.iconURL = iconURL
+    }
 }
