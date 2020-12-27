@@ -7,7 +7,6 @@ target 'TacterApp' do
 
   # Pods for TacterApp
     pod 'JGProgressHUD'
-    pod 'RealmSwift'
     pod 'SDWebImage'
 
 end
