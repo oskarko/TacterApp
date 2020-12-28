@@ -10,6 +10,7 @@ iOS project developed with *Swift 5* + *MVVM pattern* + *No Storyboards* + *Core
 
 ## How to run the project ?
 * Download the zip file or clone the project, currently there's one master branch.
+* Install required pods.
 * Run the project using Xcode( change the bundle identifier, if you want to run it on your device).
 
 
