@@ -1,17 +1,31 @@
 # TacterApp
 Technical test for Tacter App Startup.
 
-iOS project developed with with *Swift 5* + *MVVM pattern* + *No Storyboards* + *Core Data* as Local storage.
+iOS project developed with *Swift 5* + *MVVM pattern* + *No Storyboards* + *Core Data* as Local storage.
 
-Some views.
+## Screenshots
 
 ![alt tag1](images/image_01.png)
 ![alt tag2](images/image_02.png)
 
+## How to run the project ?
+* Download the zip file or clone the project, currently there's one master branch.
+* Run the project using Xcode( change the bundle identifier, if you want to run it on your device).
+
+
+## Having trouble ?
+* If you are having trouble with this project or if you find any bugs, do open a new issue and describe the problem.
+* Alternatively, you can drop me a mail @ oscar.garrucho@gmail.com
+
+## Spread the word!
+Liked the project? Just give it a star ⭐️ and spread the word!
+
+## Credits
+**© Óscar R. Garrucho | 2020**
 
 Visit my blog for more info: [www.oscargarrucho.com](http://www.oscargarrucho.com/)
 
-MIT License
+## MIT License
 
 Copyright (c) 2018 Chester How
 
